@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tdd-angular-n2"
+    }
+  },
+  "defaultProject": "tdd-angular-n2",
+  "cli": {
+    "analytics": false
+  }
 }
