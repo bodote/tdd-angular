@@ -11,6 +11,6 @@ describe('FavoriteMoviesService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();//test
+    expect(service).toBeTruthy();
   });
 });
