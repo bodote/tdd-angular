@@ -29,5 +29,13 @@ describe('FavoriteMoviesComponent', () => {
       expect(de.length).toBe(1)
       expect(de[0].nativeElement.textContent).toContain('My Favorite Movies')
     })
+    fit('should show the movies',()=>{
+      component.favoriteMovies = ["Return of the Jedis","A Space Odyssey", "The Terminator"]
+      fixture.detectChanges()
+      let de = fixture.debugElement.queryAll(By.css('li'))
+      expect(de.length).toBe(3)
+      expect(de[0].nativeElement.textContent).toContain('Return of the Jedis')
+      expect(de[2].nativeElement.textContent).toContain('The Terminator')
+    })
   })
 });
