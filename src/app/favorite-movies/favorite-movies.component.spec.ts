@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { from, EMPTY } from 'rxjs';
+import { from, EMPTY, Observable, throwError } from 'rxjs';
 import { FavoriteMoviesService } from '../services/favorite-movies.service';
 
 import { FavoriteMoviesComponent } from './favorite-movies.component';
@@ -33,7 +33,7 @@ describe('FavoriteMoviesComponent', () => {
       expect(de.length).toBe(1)
       expect(de[0].nativeElement.textContent).toContain('My Favorite Movies')
     })
-    fit('should show the movies', ()=> {
+    it('should show the movies', ()=> {
       component.favoriteMovies$ = from([["Return of the Jedis", "A Space Odyssey", "The Terminator"]])
       fixture.detectChanges()
         let de = fixture.debugElement.queryAll(By.css('.movie'))
@@ -47,6 +47,14 @@ describe('FavoriteMoviesComponent', () => {
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled()
 
+    })
+    it('should show an error if  getting  movies fails', () => {
+      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
+      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(throwError('error'))
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalled()
+      let debElement = fixture.debugElement.query(By.css('.error'))
+      expect(debElement.nativeElement.textContent).toContain('error')
     })
   })
 });
