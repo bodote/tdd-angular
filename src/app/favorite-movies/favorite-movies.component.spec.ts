@@ -48,7 +48,7 @@ describe('FavoriteMoviesComponent', () => {
       expect(spy).toHaveBeenCalled()
 
     })
-    fit('should show an error if  getting  movies fails', () => {
+    it('should show an error if  getting  movies fails', () => {
       let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
       let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(throwError('error'))
       fixture.detectChanges();
