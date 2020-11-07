@@ -4,6 +4,10 @@
 <ng-container *ngIf="favoriteMovies$ | async as  favoriteMovies; else loadOrError">
   <div class="movie" *ngFor="let movie of favoriteMovies">{{movie}}</div>
 </ng-container>
-<ng-template #loadOrError>
+
+<!--<ng-template #loadOrError>
   <div class="error" > still loading or error...</div>
-</ng-template>
+</ng-template>-->
+
+<!--Alternative Lösung:-->
+<div class="error" *ngIf="error">{{error}}</div>

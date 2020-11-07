@@ -8,7 +8,7 @@ import { FavoriteMoviesComponent } from './favorite-movies.component';
 describe('FavoriteMoviesComponent', () => {
   let component: FavoriteMoviesComponent;
   let fixture: ComponentFixture<FavoriteMoviesComponent>;
-
+  let testMovies = ["Return of the Jedis", "A Space Odyssey", "The Terminator"]
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FavoriteMoviesComponent]
@@ -34,7 +34,7 @@ describe('FavoriteMoviesComponent', () => {
       expect(de[0].nativeElement.textContent).toContain('My Favorite Movies')
     })
     it('should show the movies', ()=> {
-      component.favoriteMovies$ = from([["Return of the Jedis", "A Space Odyssey", "The Terminator"]])
+      component.favoriteMovies$ = from([testMovies])
       fixture.detectChanges()
         let de = fixture.debugElement.queryAll(By.css('.movie'))
         expect(de.length).toBe(3)
@@ -48,13 +48,21 @@ describe('FavoriteMoviesComponent', () => {
       expect(spy).toHaveBeenCalled()
 
     })
-    it('should show an error if  getting  movies fails', () => {
+    fit('should show an error if  getting  movies fails', () => {
       let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
       let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(throwError('error'))
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled()
       let debElement = fixture.debugElement.query(By.css('.error'))
       expect(debElement.nativeElement.textContent).toContain('error')
+    })
+    it('should NOT show an error if  getting  movies is ok', () => {
+      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
+      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(from([testMovies]))
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalled()
+      let debElement = fixture.debugElement.queryAll(By.css('.error'))
+      expect(debElement.length).toBe(0)
     })
   })
 });
