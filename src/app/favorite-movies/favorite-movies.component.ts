@@ -1,5 +1,6 @@
 import { FavoriteMoviesService } from './../services/favorite-movies.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -7,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorite-movies.component.css']
 })
 export class FavoriteMoviesComponent implements OnInit {
-  favoriteMovies: string[] 
-
+  @Input() favoriteMovies$: Observable<string[]> 
   constructor(private favMoService : FavoriteMoviesService) { }
-
   ngOnInit(): void {
-    this.favMoService.getFavoriteMovies().subscribe(data=>{
-      this.favoriteMovies = data
-    })
+    if (this.favoriteMovies$ === undefined){// because if the favoriteMovies$ is already set via '@Input()' we don't want to overwrite it
+      this.favoriteMovies$ = this.favMoService.getFavoriteMovies();
+    }
   }
-
 }

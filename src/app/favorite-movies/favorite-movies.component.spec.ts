@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { from , EMPTY } from 'rxjs';
+import { from, EMPTY } from 'rxjs';
 import { FavoriteMoviesService } from '../services/favorite-movies.service';
 
 import { FavoriteMoviesComponent } from './favorite-movies.component';
@@ -11,41 +11,41 @@ describe('FavoriteMoviesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavoriteMoviesComponent ]
+      declarations: [FavoriteMoviesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FavoriteMoviesComponent);
     component = fixture.componentInstance;
-    
+
   });
 
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
-  describe('Render',()=>{
-    it('should have a title',()=>{
+  describe('Render', () => {
+    it('should have a title', () => {
       fixture.detectChanges();
       let de = fixture.debugElement.queryAll(By.css('h1'))
       expect(de.length).toBe(1)
       expect(de[0].nativeElement.textContent).toContain('My Favorite Movies')
     })
-    it('should show the movies',()=>{
-      component.favoriteMovies = ["Return of the Jedis","A Space Odyssey", "The Terminator"]
+    fit('should show the movies', ()=> {
+      component.favoriteMovies$ = from([["Return of the Jedis", "A Space Odyssey", "The Terminator"]])
       fixture.detectChanges()
-      let de = fixture.debugElement.queryAll(By.css('li'))
-      expect(de.length).toBe(3)
-      expect(de[0].nativeElement.textContent).toContain('Return of the Jedis')
-      expect(de[2].nativeElement.textContent).toContain('The Terminator')
+        let de = fixture.debugElement.queryAll(By.css('.movie'))
+        expect(de.length).toBe(3)
+        expect(de[0].nativeElement.textContent).toContain('Return of the Jedis')
+        expect(de[2].nativeElement.textContent).toContain('The Terminator')
     })
-    it('should call service to get the movies',() => {
-       let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
-       let spy  = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(EMPTY)
-       fixture.detectChanges();
-       expect(spy).toHaveBeenCalled()
+    it('should call service to get the movies', () => {
+      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
+      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(EMPTY)
+      fixture.detectChanges();
+      expect(spy).toHaveBeenCalled()
 
     })
   })
