@@ -1,7 +1,7 @@
 <h1>My Favorite Movies</h1>
 
 
-<ng-container *ngIf="favoriteMovies$ | async as  favoriteMovies; else loadOrError">
+<ng-container *ngIf="favoriteMovies$ | async as  favoriteMovies">  <!-- else loadOrError"> -->
   <div class="movie" *ngFor="let movie of favoriteMovies">{{movie}}</div>
 </ng-container>
 
