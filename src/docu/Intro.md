@@ -20,7 +20,7 @@ Willkommen zum ersten Teil unserer Serie über Test Driven Development mit Angul
 ## Warum ?
 Warum Test Driven Development im allgemeinen eine gute Idee ist, wisst Ihr schon. 
 
-Wenn nicht, haben wir unten nochmal den Blogpost  und das Video verlinkt.
+Wenn nicht, haben wir unten nochmal den Blogpost  und das Video im Chat und in der Einladung verlinkt.
 
 In dieser Serie von Videos soll es jetzt konkret darum gehen, wie Ihr TDD in Angular umsetzten könnt.
 

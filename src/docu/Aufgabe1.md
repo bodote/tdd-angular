@@ -3,8 +3,14 @@ Die [Aufgabe 1 findet Ihr hier](https://bodote.github.io/blog/TDD-mit-Angular/#a
 # Aufgabe 1 
 ## Vorbereitung unseres Testprojekts
 * Wir legen ein neues Angular Projekt an mit `ng new <projektname>``
-* und prüfen ob damit sowohl `ng serve` als auch `ng test` funktioniert.
-* dann vereinfachen wir das von `ng new` angelegte HTML-Template `src/app/app.component.html` indem wir alles bis auf die Zeile ` <div class="content" role="main"><span>{{ title }} app is running!</span> </div>` rauslöschen. 
+* und prüfen ob damit sowohl `ng serve --open` als auch `ng test` funktioniert.
+* dann vereinfachen wir das von `ng new` angelegte HTML-Template `src/app/app.component.html` indem wir alles bis auf die Zeile
+```typescript
+<div class="content" role="main">
+   <span> {{ title }} app is running! </span> 
+</div>
+ ``` 
+ rauslöschen. 
 * nochmal mit  `ng serve` als auch `ng test` prüfen, ob das noch funktioniert und der test noch "grün" ist.
 ## Testbed Verwendung.
 * Bevor wir mit der eigentlichen Aufgabe beginnen, schauen wir uns das Unittest-Template an. Das wird von der Angular CLI beim Erzeugen des Projekts und beim Erzeugen von neuen Componenten automatisch angelegt wird.
@@ -32,7 +38,7 @@ Dann instanzieren wir die Componente einfach so mit Typescript - Bordmitteln und
 
 # Zum Schluss
 * Unser Motto ist zwar "test first" aber streng genommen müsste es heißen:
-* "Class and message signatures and properties first".
+* **"Class and method signatures and properties first".**
 * Dann den Test schreiben, 
 * dann die eigentliche Funktionen in den Methoden implementieren
 
@@ -53,7 +59,5 @@ Das führt dann automatisch zu einer bessere Softwarearchitektur auf Methoden un
 HTML Ausgabe des speziellen Testszenarios ansehen
 
 # Verabschiedung:
-
-
-ich bekommt den Link zur Aufgabenstellung und zum Video 
-nächster Termin is Freitag 
+* Ihr bekommt den Link zur Aufgabenstellung und zum Video 
+* nächster Termin is Freitag 
