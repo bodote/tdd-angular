@@ -1,7 +1,7 @@
 import { FavoriteMoviesService } from './../services/favorite-movies.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators'
+import { Observable, EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -9,17 +9,17 @@ import { catchError } from 'rxjs/operators'
   styleUrls: ['./favorite-movies.component.css']
 })
 export class FavoriteMoviesComponent implements OnInit {
-  @Input() favoriteMovies$: Observable<string[]> 
-  error: string 
-  constructor(private favMoService : FavoriteMoviesService) { }
+  @Input() favoriteMovies$: Observable<string[]>
+  errorMessage: string
+  constructor(private readonly favMovService: FavoriteMoviesService) { }
+
   ngOnInit(): void {
-    if (this.favoriteMovies$ === undefined){// because if the favoriteMovies$ is already set via '@Input()' we don't want to overwrite it
-      this.favoriteMovies$ = this.favMoService.getFavoriteMovies().pipe(
-        catchError(err => {
-          this.error='error occured'
-          return from([['an error has occured']])
-        })
-      );
-    }
+    if (!this.favoriteMovies$) {
+      this.favoriteMovies$ = this.favMovService.getFavoriteMovies().pipe(catchError(error => {
+        this.errorMessage = error
+        return EMPTY
+      }))
+    } 
   }
+
 }

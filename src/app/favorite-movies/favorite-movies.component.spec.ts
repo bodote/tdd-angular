@@ -1,68 +1,92 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FavoriteMoviesService } from './../services/favorite-movies.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { from, EMPTY, Observable, throwError } from 'rxjs';
-import { FavoriteMoviesService } from '../services/favorite-movies.service';
+import {HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { FavoriteMoviesComponent } from './favorite-movies.component';
+import { of, throwError } from 'rxjs';
+import { delay } from 'rxjs/operators';
+ 
 
 describe('FavoriteMoviesComponent', () => {
   let component: FavoriteMoviesComponent;
   let fixture: ComponentFixture<FavoriteMoviesComponent>;
-  let testMovies = ["Return of the Jedis", "A Space Odyssey", "The Terminator"]
+  let favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FavoriteMoviesComponent]
+      declarations: [FavoriteMoviesComponent],
+      imports: [HttpClientTestingModule]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FavoriteMoviesComponent);
-    component = fixture.componentInstance;
-
+    fixture = TestBed.createComponent(FavoriteMoviesComponent)
   });
 
   it('should create', () => {
+    component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
   describe('Render', () => {
-    it('should have a title', () => {
-      fixture.detectChanges();
-      let de = fixture.debugElement.queryAll(By.css('h1'))
-      expect(de.length).toBe(1)
-      expect(de[0].nativeElement.textContent).toContain('My Favorite Movies')
+    it('should show a <h1> headline with title My Favorite Movies', () => {
+      const de = fixture.debugElement.query(By.css('h1'))
+      expect(de.nativeElement.textContent).toContain('My Favorite Movies')
     })
-    it('should show the movies', ()=> {
-      component.favoriteMovies$ = from([testMovies])
+    it('should show my favorite movies below the Headline', () => {
+      //arrange
+      component = fixture.componentInstance;
+      //act
+      component.favoriteMovies$ = of(favoriteTestMovies)
       fixture.detectChanges()
-        let de = fixture.debugElement.queryAll(By.css('.movie'))
-        expect(de.length).toBe(3)
-        expect(de[0].nativeElement.textContent).toContain('Return of the Jedis')
-        expect(de[2].nativeElement.textContent).toContain('The Terminator')
+      //assert
+      const deArray = fixture.debugElement.queryAll(By.css('li'))
+      expect(deArray.length).toEqual(favoriteTestMovies.length)
+      expect(deArray.map(de => de.nativeElement.textContent)).toEqual(favoriteTestMovies)
     })
-    it('should call service to get the movies', () => {
-      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
-      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(EMPTY)
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalled()
-
-    })
-    it('should show an error if  getting  movies fails', () => {
-      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
-      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(throwError('error'))
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalled()
-      let debElement = fixture.debugElement.query(By.css('.error'))
-      expect(debElement.nativeElement.textContent).toContain('error')
-    })
-    it('should NOT show an error if  getting  movies is ok', () => {
-      let favoriteMoviesService = TestBed.inject(FavoriteMoviesService)
-      let spy = spyOn(favoriteMoviesService, 'getFavoriteMovies').and.returnValue(from([testMovies]))
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalled()
-      let debElement = fixture.debugElement.queryAll(By.css('.error'))
-      expect(debElement.length).toBe(0)
+    it('should show an error message , if Observable emits an error ',waitForAsync(()=>{
+      //arrange
+      const errorMsg = 'my 2nd error'
+      const favMovService = TestBed.inject(FavoriteMoviesService)
+      spyOn(favMovService,'getFavoriteMovies').and.returnValue(throwError(errorMsg))
+      //act
+      fixture.detectChanges()
+      //assert
+      const de = fixture.debugElement.query(By.css('.error'))
+      expect(de.nativeElement.textContent).toContain(errorMsg)
+    }))
+  })
+  describe('Service call', () => {
+    it('should call service, and remember the movies, if favoriteMovies is not set', waitForAsync(() => {
+      //arrange
+      const favoriteMoviesService = new FavoriteMoviesService()
+      const favoriteMoviesComponent = new FavoriteMoviesComponent(favoriteMoviesService)
+      const favMovServSpy = spyOn(favoriteMoviesService, 'getFavoriteMovies')
+        .and.returnValue(of(favoriteTestMovies).pipe(delay(100)))
+      //act
+      favoriteMoviesComponent.ngOnInit()
+      //assert
+      expect(favMovServSpy).toHaveBeenCalled()
+      let actualfavoriteMovies: string[]
+      favoriteMoviesComponent.favoriteMovies$
+        .subscribe(movies => { 
+          actualfavoriteMovies = movies 
+          expect(actualfavoriteMovies).toEqual(favoriteTestMovies)
+        })
+    }))
+    it('should NOT call service if favoriteMovies is already set', () => {
+      //arrange
+      const favoriteMoviesService = new FavoriteMoviesService()
+      const favoriteMoviesComponent = new FavoriteMoviesComponent(favoriteMoviesService)
+      const favMovServSpy = spyOn(favoriteMoviesService, 'getFavoriteMovies')
+      //act
+      favoriteMoviesComponent.favoriteMovies$ = of(favoriteTestMovies)
+      favoriteMoviesComponent.ngOnInit()
+      //assert
+      expect(favMovServSpy).not.toHaveBeenCalled()
     })
   })
+
 });
