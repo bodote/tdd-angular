@@ -1,4 +1,4 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -12,9 +12,9 @@ export class FavoriteMoviesService {
 
   constructor(private readonly httpClient?: HttpClient,
     private readonly logger?: LoggerService) { }
-
+ 
   getFavoriteMovies():Observable<string[]>{
-    return this.httpClient.get<string[]>(environment.serviceUrl)
+    return this.httpClient.get<string[]>(environment.serviceUrl).pipe(retry(environment.httpServiceRetrails))
       .pipe(catchError((error)=>{
         this.logger.logError(error) 
         return throwError(error)
