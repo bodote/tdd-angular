@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   serviceUrl: 'service.test.com',
-  httpServiceRetrails: 10
+  httpServiceRetrials: 2
 };
 
 /*

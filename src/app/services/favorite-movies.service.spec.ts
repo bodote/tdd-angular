@@ -3,8 +3,9 @@ import { environment } from './../../environments/environment';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { FavoriteMoviesService } from './favorite-movies.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
-fdescribe('FavoriteMoviesService', () => {
+describe('FavoriteMoviesService', () => {
   let service: FavoriteMoviesService;
   const favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
 
@@ -42,7 +43,7 @@ fdescribe('FavoriteMoviesService', () => {
     })
     //assert 
     let testRequest: TestRequest
-    for (let n = 1; n <= environment.httpServiceRetrails; n++) {
+    for (let n = 1; n <= environment.httpServiceRetrials; n++) {
       testRequest = httpTestContrl.expectOne(environment.serviceUrl)
       testRequest.flush('Error', { status: 500, statusText: 'internal server error' })
       expect(testRequest.request.method).toEqual('GET')
@@ -52,7 +53,7 @@ fdescribe('FavoriteMoviesService', () => {
     testRequest = httpTestContrl.expectOne(environment.serviceUrl)
     testRequest.flush('Error', { status: 500, statusText: 'internal server error' })
     expect(testRequest.request.method).toEqual('GET')
-    expect(resultError).toBeTruthy()
+    expect(resultError).toBeTrue()
     expect(loggerSpy).toHaveBeenCalled()
   })
   it('should return return the fav movie after 3rd retrail', () => {
@@ -64,11 +65,12 @@ fdescribe('FavoriteMoviesService', () => {
     const loggerSpy = spyOn(logger, 'logError')
     //act
     service.getFavoriteMovies().subscribe(data => resultMovies = data, (error) => {
-      resultError = true
+      resultError = true;
+
     })
     //assert 
     let testRequest: TestRequest
-    for (let n = 1; n <= environment.httpServiceRetrails; n++) {
+    for (let n = 1; n <= environment.httpServiceRetrials; n++) {
       testRequest = httpTestContrl.expectOne(environment.serviceUrl)
       testRequest.flush('Error', { status: 500, statusText: 'internal server error' })
       expect(testRequest.request.method).toEqual('GET')
@@ -81,5 +83,38 @@ fdescribe('FavoriteMoviesService', () => {
     expect(resultError).toBeFalse()
     expect(loggerSpy).not.toHaveBeenCalled()
     expect(resultMovies).toEqual(favoriteTestMovies)
+  })
+
+  it('should return the error immediately from Observable and log the error if there is a connection problem ', () => {
+    //arrange
+    let resultError = false
+    let httpErrorResponse: HttpErrorResponse
+    const httpTestContrl = TestBed.inject(HttpTestingController)
+    const logger = TestBed.inject(LoggerService)
+    const loggerSpy = spyOn(logger, 'logError')
+    //act
+    service.getFavoriteMovies().subscribe(() => { }, (error) => {
+      resultError = true
+      httpErrorResponse = error
+    })
+    //assert 
+    //assert 
+    let testRequest: TestRequest
+    const errorEvent = new ErrorEvent('network error')
+    for (let n = 1; n <= environment.httpServiceRetrials; n++) {
+      testRequest = httpTestContrl.expectOne(environment.serviceUrl)
+      testRequest.error(errorEvent)
+      expect(testRequest.request.method).toEqual('GET')
+      expect(resultError).toBeFalse()
+      expect(loggerSpy).not.toHaveBeenCalled()
+    }
+
+    testRequest = httpTestContrl.expectOne(environment.serviceUrl)
+   
+    testRequest.error(errorEvent)
+    expect(testRequest.request.method).toEqual('GET')
+    expect(resultError).toBeTrue()
+    expect(loggerSpy).toHaveBeenCalled()
+    expect(httpErrorResponse.error.type).toEqual(errorEvent.type)
   })
 });

@@ -7,7 +7,7 @@ export class LoggerService {
 
   constructor() { }
   logError(error){
-    console.error(error)
+    console.error(JSON.stringify(error))
     //call backend service to report error
     //....
   }

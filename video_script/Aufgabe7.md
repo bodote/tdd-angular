@@ -6,6 +6,10 @@
  -> bei fragen könnt ihr mich gern unterbrechen
  -> lese Aufgabe 7 
 
+## Bonusaufgabe zu 7
+verwende `TestRequest.error(new EventError('network error'))``
+statt `TestRequest.flush(...)`
+Eigentlich zu klein um das schon "Aufgabe zu nennen" besser wäre es da zu Aufgabe 7 hinzuzufügen
 
 # ENDE:
 * Wie findet Ihr das Video, was ist deiner Meinung nach gut, was weniger gelungen?
