@@ -1,7 +1,7 @@
 # /bin/bash
-Folge="7"
+Folge="8"
 echo Folge ${Folge}
-exit 0
+#exit 0
 cp -r ~/swe_projects/live-tdd-angular/tdd-angular-ws${Folge}/src/environments ~/swe_projects/tdd-angular-final/src/
 cp -r ~/swe_projects/live-tdd-angular/tdd-angular-ws${Folge}/src/app ~/swe_projects/tdd-angular-final/src/
 git add .

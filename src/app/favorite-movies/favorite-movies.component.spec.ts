@@ -6,6 +6,8 @@ import {HttpClientTestingModule, HttpTestingController } from '@angular/common/h
 import { FavoriteMoviesComponent } from './favorite-movies.component';
 import { of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FavoriteMovieComponent } from '../favorite-movie/favorite-movie.component';
+import { MockComponent } from 'ng-mocks';
  
 
 describe('FavoriteMoviesComponent', () => {
@@ -15,7 +17,7 @@ describe('FavoriteMoviesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FavoriteMoviesComponent],
+      declarations: [FavoriteMoviesComponent, MockComponent(FavoriteMovieComponent)],
       imports: [HttpClientTestingModule]
     })
       .compileComponents();
@@ -42,9 +44,9 @@ describe('FavoriteMoviesComponent', () => {
       component.favoriteMovies$ = of(favoriteTestMovies)
       fixture.detectChanges()
       //assert
-      const deArray = fixture.debugElement.queryAll(By.css('li'))
+      const deArray = fixture.debugElement.queryAll(By.directive(FavoriteMovieComponent))
       expect(deArray.length).toEqual(favoriteTestMovies.length)
-      expect(deArray.map(de => de.nativeElement.textContent)).toEqual(favoriteTestMovies)
+      expect(deArray.map(de => (de.componentInstance as FavoriteMovieComponent).movieName)).toEqual(favoriteTestMovies)
     })
     it('should show an error message , if Observable emits an error ',waitForAsync(()=>{
       //arrange

@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
+import { FavoriteMovieComponent } from './favorite-movie/favorite-movie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FavoriteMoviesComponent
+    FavoriteMoviesComponent,
+    FavoriteMovieComponent
   ],
   imports: [
     BrowserModule,

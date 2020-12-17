@@ -1,7 +1,7 @@
 <h1>My Favorite Movies</h1>
-<ul *ngIf = "favoriteMovies$  | async as favoriteMovies">
-  <li *ngFor="let movie of favoriteMovies">{{movie}}</li>
-</ul>
+<ng-container *ngIf = "favoriteMovies$  | async as favoriteMovies">
+  <favorite-movie *ngFor="let movie of favoriteMovies" [movieName]="movie"></favorite-movie>
+</ng-container>
 
 <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
 
