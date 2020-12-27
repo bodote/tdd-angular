@@ -12,7 +12,10 @@
 * ng test
 * ng g c SearchMovies
 * `@Output() movieToAdd:string`ergänzen
-* Test hinzufügen
+* Test hinzufügen:
+  * "Render" - test position neuer componente unter headline
+  * refactorire Tests und führe "describe('should react to events ')" ein
+  * füge test hinzu der den movieToAdd - Event testet
 
 
 # ENDE:

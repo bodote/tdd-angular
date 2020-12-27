@@ -9,3 +9,7 @@ git commit -m "Loesung Folge ${Folge}"
 git tag -a v1.${Folge} -m "Loesung Folge ${Folge}"
 git push --tags
 git ls-remote --tags origin
+# delete the tag:
+# git tag -d v1.9
+# delete remote tag
+# git push --delete origin tagname
