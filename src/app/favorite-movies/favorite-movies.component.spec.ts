@@ -32,6 +32,20 @@ describe('FavoriteMoviesComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
+  it('should call the deleteMovie method of the service, if it gets an delete event ',()=>{
+    //arrange
+    const service = TestBed.inject(FavoriteMoviesService)
+    const serviceSpy = spyOn(service,'deleteMovie')
+    component = fixture.componentInstance;
+    component.favoriteMovies$=of(favoriteTestMovies)
+    fixture.detectChanges();
+    const de = fixture.debugElement.query(By.directive(FavoriteMovieComponent))
+    const favMovComp = de.componentInstance as FavoriteMovieComponent
+    //act
+    favMovComp.deleteMovie.emit(favoriteTestMovies[1])
+    //assert
+    expect(serviceSpy).toHaveBeenCalledWith(favoriteTestMovies[1])
+  })
   describe('Render', () => {
     it('should show a <h1> headline with title My Favorite Movies', () => {
       const de = fixture.debugElement.query(By.css('h1'))

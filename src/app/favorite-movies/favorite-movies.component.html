@@ -1,6 +1,6 @@
 <h1>My Favorite Movies</h1>
 <ng-container *ngIf = "favoriteMovies$  | async as favoriteMovies">
-  <favorite-movie *ngFor="let movie of favoriteMovies" [movieName]="movie"></favorite-movie>
+  <favorite-movie *ngFor="let movie of favoriteMovies" [movieName]="movie" (deleteMovie)="deleteMovie($event)"></favorite-movie>
 </ng-container>
 
 <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
