@@ -17,7 +17,7 @@ export class FavoriteMoviesService {
     return this.httpClient.get<string[]>(environment.serviceUrl)
       .pipe(retry(environment.httpServiceRetrials))
       .pipe(catchError((error) => {
-        console.error("error:", error)
+        //console.error("error:", error)
         this.logger.logError(error)
         return throwError(error)
       }))

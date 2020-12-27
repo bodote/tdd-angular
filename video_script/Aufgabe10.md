@@ -8,6 +8,13 @@
 # Aufgabe lesen
 ==============
 
+# Lösung: 
+* ng test
+* ng g c SearchMovies
+* `@Output() movieToAdd:string`ergänzen
+* Test hinzufügen
+
+
 # ENDE:
 * Wie findet Ihr das Video, was ist deiner Meinung nach gut, was weniger gelungen?
 * schreibt uns bitte unten eine Kommentar. Nur mit eurem Feedback können wir zukünftige Videos noch besser für euch machen!
