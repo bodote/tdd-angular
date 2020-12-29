@@ -1,9 +1,7 @@
 # Start
-* Super, dass Ihr wieder dabei seid, wenn es jetzt heißt: Test Driven Development in Angular!
-* mein Name ist Bodo und wie in letzten Folge geht es auch diesmal darum, wie
-* man für sog. "Smart" Components in Angular testen kann, ob sie untergeordnete Componenten richtig verwenden und integrieren.
-* Während wir uns letzte Mal angesehen haben, wie wir Tests schreiben können die prüfen, ob unsere Smart Component die Parameter richtig an die untergeordnete  Component  übergibt, geht es diesmal ums Gegenteil: 
-* Nämlich: Wie können wir für unsere Smart Component testen, ob wir Events, die von einer untergeordneten Component kommen, überhaupt richtig verarbeiten ?
+* Super, dass Ihr wieder dabei seid, wenn es jetzt zun letzten mal heißt: Test Driven Development in Angular!
+* mein Name ist Bodo und in dieser letzten Folge liegt der Schwerpunkt darauf, die Aufgabe möglichst schnell zu lösen. 
+* Nach den Übungen in den bisherigen Folgen, sollten das klappen, ohne lange zu überlegen. Also:
 
 # Aufgabe lesen
 ==============
@@ -19,9 +17,8 @@
 
 
 # ENDE:
-* Wie findet Ihr das Video, was ist deiner Meinung nach gut, was weniger gelungen?
-* schreibt uns bitte unten eine Kommentar. Nur mit eurem Feedback können wir zukünftige Videos noch besser für euch machen!
-* Wenn euch das Video gefallen hat, dann gebt uns doch bitte in jedem Fall ein "Thumbs up" unten.
-* Danke fürs dabei sein.
-* jetzt bist du dran: versuch die Aufgabe nochmal selbst mit  deinen Aufzeichnungen und den Hinweisen aus der Aufgabestellung nachzuvollziehen.
-Tschüs bis zum nächsten Mal , wenn es wieder heist:  Test Driven Develpment in Angular
+* Großes Lob, dass du bis zum Schluss durchgehalten hast!
+* Und Herlichen Dank fürs dabei sein!
+* Wenn ich es geschafft habe, dass du bis zum Ende dran geblieben bist, muss die Workshop-serie doch  ganz gut gewesen sein , oder? Genau, dann gib mir doch bitte noch einen "Thumbs up", schreibe bitte noch einen positiven Bemerkung in die Kommentare und empfehle mich deinen Kollegen weiter !
+* und nicht vergessen: jetzt bist du dran: versuch die Aufgabe nochmal selbst mit  deinen Aufzeichnungen nachzuvollziehen.
+* Macht’s gut, und danke für den Fisch!

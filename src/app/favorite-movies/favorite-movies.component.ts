@@ -24,5 +24,8 @@ export class FavoriteMoviesComponent implements OnInit {
   deleteMovie(event:string){
     this.favMovService.deleteMovie(event)
   }
+  addMovie(event:string){
+    this.favMovService.addMovie(event)
+  }
 
 }

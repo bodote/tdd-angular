@@ -25,4 +25,7 @@ export class FavoriteMoviesService {
   deleteMovie(movie:string){
     
   }
+  addMovie(movie:string){
+    
+  }
 }
