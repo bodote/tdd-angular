@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
 import { FavoriteMovieComponent } from './favorite-movie/favorite-movie.component';
 import { SearchMoviesComponent } from './search-movies/search-movies.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SearchMoviesComponent } from './search-movies/search-movies.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
