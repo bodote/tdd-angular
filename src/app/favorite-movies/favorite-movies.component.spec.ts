@@ -18,7 +18,7 @@ describe('FavoriteMoviesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FavoriteMoviesComponent, MockComponent(FavoriteMovieComponent), MockComponent(SearchMoviesComponent)],
+      declarations: [FavoriteMoviesComponent, FavoriteMovieComponent, MockComponent(SearchMoviesComponent)],
       imports: [HttpClientTestingModule]
     })
       .compileComponents();
@@ -44,7 +44,8 @@ describe('FavoriteMoviesComponent', () => {
       const de = fixture.debugElement.query(By.directive(FavoriteMovieComponent))
       const favMovComp = de.componentInstance as FavoriteMovieComponent
       //act
-      favMovComp.deleteMovie.emit(favoriteTestMovies[1])
+      console.log("test-act:FavoriteMovieComponent.deleteMovie(movie:str)")
+      favMovComp.deleteMovie(favoriteTestMovies[1])  
       //assert
       expect(serviceSpy).toHaveBeenCalledWith(favoriteTestMovies[1])
     })

@@ -17,6 +17,7 @@ export class FavoriteMovieComponent implements OnInit {
     
   }
   deleteMovie(movie:string):void{
+    console.log("FavoriteMovieComponent.deleteMovie(movie:string):",movie)
     this.deleteEmitter.emit(movie)
   }
 
