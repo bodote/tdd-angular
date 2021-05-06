@@ -11,14 +11,14 @@ import { FavoriteMovieComponent } from '../favorite-movie/favorite-movie.compone
 import { MockComponent } from 'ng-mocks';
 
 
-xdescribe('FavoriteMoviesComponent', () => {
+describe('FavoriteMoviesComponent', () => {
   let component: FavoriteMoviesComponent;
   let fixture: ComponentFixture<FavoriteMoviesComponent>;
   let favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FavoriteMoviesComponent, MockComponent(FavoriteMovieComponent), MockComponent(SearchMoviesComponent)],
+      declarations: [FavoriteMoviesComponent, FavoriteMovieComponent, MockComponent(SearchMoviesComponent)],
       imports: [HttpClientTestingModule]
     })
       .compileComponents();

@@ -5,7 +5,7 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 import { FavoriteMoviesService } from './favorite-movies.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
-xdescribe('FavoriteMoviesService', () => {
+describe('FavoriteMoviesService', () => {
   let service: FavoriteMoviesService;
   const favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
 

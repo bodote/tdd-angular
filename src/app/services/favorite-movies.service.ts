@@ -19,14 +19,14 @@ export class FavoriteMoviesService {
 
   getFavoriteMovies(): Observable<string[]> {
     const favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
-    return from([favoriteTestMovies]);
-    /* return this.httpClient.get<string[]>(environment.serviceUrl)
+   /*  return from([favoriteTestMovies]); */
+    return this.httpClient.get<string[]>(environment.serviceUrl)
       .pipe(retry(environment.httpServiceRetrials))
       .pipe(catchError((error) => {
         //console.error("error:", error)
         this.logger.logError(error)
         return throwError(error)
-      })) */
+      }))
   }
   deleteMovie(movie:string){
     console.log("favorite-movies.service delete the movie:" + movie)
