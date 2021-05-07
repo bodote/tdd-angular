@@ -26,7 +26,7 @@ describe('FavoriteMovieComponent', () => {
   it('should contain label with text',()=>{
     const nativeElement = fixture.nativeElement;
     expect(nativeElement.querySelector('label').textContent).toContain('delete');
-    //expect(fixture).toMatchSnapshot()
+    expect(fixture).toMatchSnapshot()
   
   })
 });
