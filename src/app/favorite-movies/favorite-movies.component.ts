@@ -17,9 +17,11 @@ export class FavoriteMoviesComponent implements OnInit {
   ngOnInit(): void {
     //this.favoriteMovies$ = from([["2001: A Space Odysey", "Star Wars", "Star Trek"]])
     //this.favoriteMovies$.subscribe(movies => this.favoriteMovies = movies)
+ 
+
     if (!this.favoriteMovies$) {
       this.favoriteMovies$ = this.favMovService.getFavoriteMovies().pipe(catchError(error => {
-        this.errorMessage = error
+        this.errorMessage = error //TODO: make it print nice AND make unit test work
         return EMPTY
       }))
     } 

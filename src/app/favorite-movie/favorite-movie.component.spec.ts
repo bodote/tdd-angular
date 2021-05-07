@@ -2,9 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FavoriteMovieComponent } from './favorite-movie.component';
 
+
 describe('FavoriteMovieComponent', () => {
   let component: FavoriteMovieComponent;
-  let fixture: ComponentFixture<FavoriteMovieComponent>;
+  let fixture: ComponentFixture<FavoriteMovieComponent>;;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,4 +23,10 @@ describe('FavoriteMovieComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should contain label with text',()=>{
+    const nativeElement = fixture.nativeElement;
+    expect(nativeElement.querySelector('label').textContent).toContain('delete');
+    //expect(fixture).toMatchSnapshot()
+  
+  })
 });

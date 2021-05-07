@@ -1,12 +1,16 @@
 <h1>My Favorite Movies</h1>
 <search-movies (movieToAdd)="addMovie($event)"></search-movies>
 
-
+<p>--Liste:--</p>
 <ng-container *ngIf = "favoriteMovies$  | async as favoriteMovies">
   <favorite-movie *ngFor="let movie of favoriteMovies" [movieName]="movie" (deleteEmitter)="deleteMovie($event)">{{movie}}</favorite-movie>
+<!--   [movieName]="movie" input for childcomp's prop "movieName" -->
+<!-- deleteEmitter is generatet  by click in childcomponent, which calls a method in child comp, which emits a event 
+to "deleteEmitter" @Output EventEmitter<string> which in turn calls the "deleteEmitter" Event in this comp , which in turn calls the 
+  deleteMovie method in this parent component -->
 </ng-container>
 
-
+<p>--Ende--</p> 
 
 <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
 

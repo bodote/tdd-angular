@@ -18,7 +18,7 @@ export class FavoriteMoviesService {
     private readonly logger?: LoggerService) { }
 
   getFavoriteMovies(): Observable<string[]> {
-    const favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
+    const favoriteTestMovies = ["from in memory, when service not available","2001: A Space Odysey", "Star Wars", "Star Trek"]
    /*  return from([favoriteTestMovies]); */
     return this.httpClient.get<string[]>(environment.serviceUrl)
       .pipe(retry(environment.httpServiceRetrials))
@@ -26,6 +26,7 @@ export class FavoriteMoviesService {
         //console.error("error:", error)
         this.logger.logError(error)
         return throwError(error)
+        //return [favoriteTestMovies]
       }))
   }
   deleteMovie(movie:string){

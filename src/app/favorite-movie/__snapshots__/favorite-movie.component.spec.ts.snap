@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoriteMovieComponent should contain label with text 1`] = `
+<favorite-movie
+  deleteEmitter={[Function EventEmitter_]}
+>
+  <p>
+    Movie:  
+    <label>
+      delete an item: 
+    </label>
+    <button>
+      delete
+    </button>
+  </p>
+</favorite-movie>
+`;

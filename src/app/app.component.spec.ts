@@ -41,4 +41,11 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.content span').textContent).toContain('is running!');
   });
+
+  it('should contain a checkbox ', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('input[name="mycheck"]').value).toContain('on');
+  });
 });
