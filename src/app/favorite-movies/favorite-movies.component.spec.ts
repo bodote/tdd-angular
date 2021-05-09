@@ -1,11 +1,12 @@
 import { SearchMoviesComponent } from './../search-movies/search-movies.component';
 import { FavoriteMoviesService } from './../services/favorite-movies.service';
+import { mocked } from 'ts-jest/utils';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { FavoriteMoviesComponent } from './favorite-movies.component';
-import { of, throwError } from 'rxjs';
+import { from, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { FavoriteMovieComponent } from '../favorite-movie/favorite-movie.component';
 import { MockComponent } from 'ng-mocks';
@@ -15,7 +16,7 @@ describe('FavoriteMoviesComponent', () => {
   let component: FavoriteMoviesComponent;
   let fixture: ComponentFixture<FavoriteMoviesComponent>;
   let favoriteTestMovies = ["2001: A Space Odysey", "Star Wars", "Star Trek"]
-
+ 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FavoriteMoviesComponent, FavoriteMovieComponent, MockComponent(SearchMoviesComponent)],
@@ -117,7 +118,9 @@ describe('FavoriteMoviesComponent', () => {
           actualfavoriteMovies = movies
           expect(actualfavoriteMovies).toEqual(favoriteTestMovies)
         })
+      
     }))
+   
     it('should NOT call service if favoriteMovies is already set', () => {
       //arrange
       const favoriteMoviesService = new FavoriteMoviesService()
